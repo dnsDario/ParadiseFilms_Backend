@@ -40,6 +40,10 @@ mongoose.connect(process.env.conectStream)
 app.use("/api/users", userRoutes)
 app.use("/api/films", filmsRoutes)
 
+app.get("/", (req, res) => {
+    res.send("Express on Vercel 🚀");
+  });
+
 app.listen(port, () =>{
     console.log(`API funcionando en puerto ${port}`)
 })
