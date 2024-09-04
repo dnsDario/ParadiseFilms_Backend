@@ -3,6 +3,7 @@ const mongoose= require("mongoose")
 const cors = require("cors")
 const userRoutes = require("./routes/user.routes")
 const filmsRoutes = require("./routes/film.routes")
+const seriesRoutes = require("./routes/serie.routes")
 
 require("dotenv").config();
 const app = express()
@@ -34,6 +35,7 @@ mongoose.connect(process.env.conectStream)
 
 app.use("/api/users", userRoutes)
 app.use("/api/films", filmsRoutes)
+app.use("/api/series", seriesRoutes)
 
 app.get("/", (req, res) => {
     res.send("Express on Vercel 🚀");
