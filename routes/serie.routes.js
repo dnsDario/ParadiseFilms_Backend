@@ -32,7 +32,7 @@ router.get("/:id", isAuthenticated, async (req,res) =>{
 
 router.post("/", isAdmin, async (req,res) =>{
   try {
-    const newSilm = await insert(req.body)
+    const newSerie = await insert(req.body)
     return res.status(200).json({msg: "serie creada con éxito", newSerie})
   } catch(error) {
     return res.status(500).json({ msg: "error al guardar la serie" });
