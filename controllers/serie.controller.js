@@ -23,6 +23,21 @@ async function insert(body) {
     return  newSerie
 }
 
+async function update(id, body) {
+  const updatedSerie = await Serie.findByIdAndUpdate(
+      id, 
+      {
+          title: body.title,
+          synopsis: body.synopsis,
+          img: body.img,
+          director: body.director,
+          year: body.year,
+          category: body.category,
+      },
+      { new: true } // devuelve el documento actualizado
+  );
+  return updatedSerie;
+}
 async function deleteOne(id) {
   const serieDeleted = await Serie.findByIdAndDelete(id);
   return serieDeleted;
@@ -33,5 +48,6 @@ module.exports = {
     findAll,
     findById,
     insert,
+    update,
     deleteOne,
 }

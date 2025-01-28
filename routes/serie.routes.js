@@ -4,6 +4,7 @@ const {
   findAll,
   findById,
   insert,
+  update,
   deleteOne,
 } = require("../controllers/serie.controller");
 const { isAuthenticated, isAdmin } = require("../middleware/auth.middleware");
@@ -43,6 +44,15 @@ router.delete("/:id", isAdmin, async (req, res) => {
   try {
     const serieDeleted = await deleteOne(req.params.id);
     return res.status(200).json({ msg: "serie elminada: ", serieDeleted });
+  } catch (error) {
+    return res.status(500).json({ msg: "error interno del servidor" });
+  }
+});
+
+router.put("/:id", isAdmin, async (req, res) => {
+  try {
+    const updatedSerie = await update(req.params.id, req.body);
+    return res.status(200).json({ msg: "serie modificada: ", updatedSerie });
   } catch (error) {
     return res.status(500).json({ msg: "error interno del servidor" });
   }

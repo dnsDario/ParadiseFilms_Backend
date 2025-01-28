@@ -23,6 +23,22 @@ async function insert(body) {
     return  newFilm
 }
 
+async function update(id, body) {
+  const updatedFilm = await Film.findByIdAndUpdate(
+      id, 
+      {
+          title: body.title,
+          synopsis: body.synopsis,
+          img: body.img,
+          director: body.director,
+          year: body.year,
+          category: body.category,
+      },
+      { new: true } // devuelve el documento actualizado
+  );
+  return updatedFilm;
+}
+
 async function deleteOne(id) {
   const filmDeleted = await Film.findByIdAndDelete(id);
   return filmDeleted;
@@ -33,5 +49,6 @@ module.exports = {
     findAll,
     findById,
     insert,
+    update,
     deleteOne,
 }
