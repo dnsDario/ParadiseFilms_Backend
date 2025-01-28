@@ -9,7 +9,7 @@ require("dotenv").config();
 const app = express()
 
 const port = process.env.PORT || 3000;
-const host = process.env.HOST || process.env.FRONT_URL_VERCEL;
+const host = process.env.FRONT_URL_VERCEL || process.env.HOST  ;
 
 var corsOptions = {
     //config. para cors abra conexion a la ruta elegida
