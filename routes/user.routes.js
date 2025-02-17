@@ -12,7 +12,7 @@ const {
   deleteUser,
 } = require("../controllers/user.controller");
 
-const { isAdmin, isAuthenticated } = require("../middleware/auth.middleware");
+const { isAdmin, isAdminPro, isAuthenticated } = require("../middleware/auth.middleware");
 const {pwdIguales, middleWareVerifYCambioContrasena} = require ("../middleware/usuario.middleware")
 
 router.get("/", isAdmin, async (req, res) => {
@@ -76,7 +76,7 @@ router.post("/login", async (req, res) => {
   }
 });
 
-router.delete("/:id", isAdmin, async (req, res) => {
+router.delete("/:id", isAdminPro, async (req, res) => {
   try {
     const usuarioBorrado = await deleteUser(req.params.id);
     return res.status(200).json({ msg: "usuario eliminado: ", usuarioBorrado });
@@ -88,7 +88,7 @@ router.delete("/:id", isAdmin, async (req, res) => {
 * Para modificar un usuario, tendremos que poner en la ruta el "id" del usuario a modificar y añadir la query "?token=..(token de admin).."
 * Solo de esta forma, estando loggeado como admin y con el id del usuario a modificar, se podrá modificar y poner otro usuario con role admin.
  */
-router.put("/:id", isAdmin, async (req, res) => {
+router.put("/:id", isAdminPro, async (req, res) => {
   try {
     await cambiarUsuario(req.params.id, req.body);
     return res

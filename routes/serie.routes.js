@@ -7,7 +7,7 @@ const {
   update,
   deleteOne,
 } = require("../controllers/serie.controller");
-const { isAuthenticated, isAdmin } = require("../middleware/auth.middleware");
+const { isAuthenticated, isAdminPro } = require("../middleware/auth.middleware");
 
 router.get("/", isAuthenticated, async (req,res) => {
   try {
@@ -31,7 +31,7 @@ router.get("/:id", isAuthenticated, async (req,res) =>{
 });
 
 
-router.post("/", isAdmin, async (req,res) =>{
+router.post("/", isAdminPro, async (req,res) =>{
   try {
     const newSerie = await insert(req.body)
     return res.status(200).json({msg: "serie creada con éxito", newSerie})
@@ -40,7 +40,7 @@ router.post("/", isAdmin, async (req,res) =>{
   }
 });
 
-router.delete("/:id", isAdmin, async (req, res) => {
+router.delete("/:id", isAdminPro, async (req, res) => {
   try {
     const serieDeleted = await deleteOne(req.params.id);
     return res.status(200).json({ msg: "serie elminada: ", serieDeleted });
@@ -49,7 +49,7 @@ router.delete("/:id", isAdmin, async (req, res) => {
   }
 });
 
-router.put("/:id", isAdmin, async (req, res) => {
+router.put("/:id", isAdminPro, async (req, res) => {
   try {
     const updatedSerie = await update(req.params.id, req.body);
     return res.status(200).json({ msg: "serie modificada: ", updatedSerie });
